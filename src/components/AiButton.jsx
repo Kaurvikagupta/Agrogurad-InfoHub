@@ -38,7 +38,7 @@ export default function AiButton({ language = 'en' }) {
     const query = input.toLowerCase()
     const responses = translations[language]
     let response = responses.aiDefault
-    
+
     const responseMap = {
       'irrigation': 'irrigationResponse',
       'pest': 'pestResponse',
@@ -56,7 +56,7 @@ export default function AiButton({ language = 'en' }) {
       'msme': 'msmeResponse',
       'helpline': 'helplineResponse'
     }
-    
+
     Object.keys(responseMap).forEach(key => {
       if (query.includes(key)) {
         response = responses[responseMap[key]]
@@ -71,19 +71,23 @@ export default function AiButton({ language = 'en' }) {
   }
 
   return (
-    <>
-      {/* Floating Button */}
-      <div
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 bg-green-600 hover:bg-green-700 text-white w-16 h-16 rounded-full flex items-center justify-center text-4xl cursor-pointer shadow-2xl transition-transform hover:scale-110 z-30"
-        title="Open AI Assistant"
-      >
-        🌾
+    <div className="fixed right-6 bottom-24 md:bottom-8 md:right-8 flex flex-col items-center gap-4 z-40">
+      {/* AI Chat Button */}
+      <div className="flex flex-col items-center gap-1">
+        <span className="bg-green-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+          AI Chat
+        </span>
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-16 h-16 rounded-full bg-green-500 shadow-xl flex items-center justify-center text-4xl hover:scale-105 transition-transform"
+        >
+          🌾
+        </button>
       </div>
 
       {/* Chat Box */}
       {open && (
-        <div className={`fixed bottom-28 right-6 w-96 ${dark ? 'bg-zinc-900 text-white' : 'bg-white text-black'} rounded-2xl shadow-2xl p-4 border ${dark ? 'border-zinc-700' : 'border-gray-300'} z-40 max-h-96 flex flex-col`}>
+        <div className={`fixed bottom-48 right-6 w-[calc(100vw-3rem)] md:w-96 ${dark ? 'bg-zinc-900 text-white' : 'bg-white text-black'} rounded-2xl shadow-2xl p-4 border ${dark ? 'border-zinc-700' : 'border-gray-300'} z-50 max-h-[60vh] flex flex-col`}>
           {/* Header */}
           <div className="flex justify-between items-center mb-3 pb-3 border-b border-green-600">
             <div>
@@ -113,11 +117,10 @@ export default function AiButton({ language = 'en' }) {
                   className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
-                      msg.type === 'user'
-                        ? 'bg-green-600 text-white rounded-br-none'
-                        : dark ? 'bg-zinc-700 text-white rounded-bl-none' : 'bg-gray-200 text-black rounded-bl-none'
-                    }`}
+                    className={`max-w-xs px-3 py-2 rounded-lg text-sm ${msg.type === 'user'
+                      ? 'bg-green-600 text-white rounded-br-none'
+                      : dark ? 'bg-zinc-700 text-white rounded-bl-none' : 'bg-gray-200 text-black rounded-bl-none'
+                      }`}
                   >
                     {msg.text}
                   </div>
@@ -134,11 +137,10 @@ export default function AiButton({ language = 'en' }) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleAsk()}
-              className={`flex-1 p-2 rounded-lg border ${
-                dark
-                  ? 'bg-zinc-800 text-white border-zinc-600'
-                  : 'bg-gray-100 text-black border-gray-300'
-              } focus:outline-none focus:ring-2 focus:ring-green-600`}
+              className={`flex-1 p-2 rounded-lg border ${dark
+                ? 'bg-zinc-800 text-white border-zinc-600'
+                : 'bg-gray-100 text-black border-gray-300'
+                } focus:outline-none focus:ring-2 focus:ring-green-600`}
             />
             <button
               onClick={handleAsk}
@@ -149,6 +151,6 @@ export default function AiButton({ language = 'en' }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }

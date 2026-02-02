@@ -156,35 +156,28 @@ export function FarmerPost({ post, language = 'en', onLike, onSave, onImageClick
   const t = translations[language]
 
   return (
-    <div className={`${dark ? 'bg-zinc-800 border-zinc-700' : 'bg-white border-gray-200'} border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow`}>
+    <div className={`${dark ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-gray-100'} border-b mb-4 overflow-hidden`}>
       {/* User Header */}
-      <div className={`${dark ? 'bg-zinc-700' : 'bg-gray-50'} p-6 flex items-center justify-between`}>
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center text-white text-3xl">
+      <div className="p-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white text-2xl">
             👨‍🌾
           </div>
           <div>
-            <h3 className={`text-lg font-bold ${dark ? 'text-white' : 'text-black'}`}>
-              {post.author}
-            </h3>
-            <div className="flex gap-2 items-center mt-1">
-              {post.location && (
-                <span className={`text-xs ${dark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  📍 {post.location}
-                </span>
-              )}
-              {post.verified && (
-                <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-full font-bold">
-                  {t.verifiedFarmer || '⭐ Verified Farmer'}
-                </span>
-              )}
-              <span className={`text-xs ${dark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {post.time}
+            <div className="flex items-center gap-1">
+              <h3 className={`font-bold ${dark ? 'text-white' : 'text-black'}`}>
+                {post.author}
+              </h3>
+              {post.verified && <span className="text-blue-500 text-sm">✔️</span>}
+            </div>
+            <div className="flex gap-1 items-center">
+              <span className={`text-xs ${dark ? 'text-gray-400' : 'text-gray-500'}`}>
+                {post.location} • {post.time}
               </span>
             </div>
           </div>
         </div>
-        <button className={`p-2 rounded-lg ${dark ? 'hover:bg-zinc-600' : 'hover:bg-gray-100'}`}>
+        <button className={`p-1 text-gray-500`}>
           ⋮
         </button>
       </div>

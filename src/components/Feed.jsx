@@ -202,6 +202,8 @@ const HEADER_MESSAGES = {
   mr: 'जागतिक शेतकरी अपडेट्स - जगभर रीयल-टाइम कृषी बातम्या',
 }
 
+import Stories from './Stories'
+
 export default function Feed({ activeTab, language = 'en', region, onImageClick }) {
   const [posts, setPosts] = useState(INITIAL_POSTS)
   const [search, setSearch] = useState('')
@@ -261,9 +263,13 @@ export default function Feed({ activeTab, language = 'en', region, onImageClick 
   }
 
   return (
-    <div className={`flex-1 overflow-y-auto ${dark ? 'bg-zinc-950' : 'bg-gray-50'} pt-24 md:pt-0`}>
-      {/* Header */}
-      <div className={`sticky top-0 z-20 ${dark ? 'bg-zinc-900 border-b border-zinc-800' : 'bg-white border-b border-gray-200'} shadow-sm p-8`}>
+    <div className={`flex-1 overflow-y-auto ${dark ? 'bg-zinc-950' : 'bg-gray-50'} pt-20 md:pt-0`}>
+      <div className="md:hidden">
+        <Stories dark={dark} />
+      </div>
+
+      {/* Header - Desktop Only */}
+      <div className={`sticky top-0 z-20 ${dark ? 'bg-zinc-900 border-b border-zinc-800' : 'bg-white border-b border-gray-200'} shadow-sm p-8 hidden md:block`}>
         <div className="max-w-5xl mx-auto">
           <h2 className={`text-4xl font-bold mb-4 ${dark ? 'text-white' : 'text-black'}`}>
             🌾 Global Farmer Updates
@@ -304,9 +310,9 @@ export default function Feed({ activeTab, language = 'en', region, onImageClick 
       </div>
 
       {/* Posts Feed - Large Cards */}
-      <div className="max-w-5xl mx-auto p-8 pb-24 md:pb-8">
+      <div className="max-w-5xl mx-auto p-2 md:p-8 pb-24 md:pb-8">
         {filteredPosts.length > 0 ? (
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {filteredPosts.map(post => renderPost(post, onImageClick))}
           </div>
         ) : (
